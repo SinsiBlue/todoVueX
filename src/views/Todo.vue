@@ -3,10 +3,10 @@
 
     <h3 class="bg-primary text-light p-4"> My first vuex task list </h3>
 
-    <form action="">
+    <form @submit.prevent="ADDtask(addTask)">
       <input type="text" class="mt-2 largeur" v-model="$store.state.addTask">
       <br>
-      <button type="submit" class="btn largeur mt-2" @click="ADDtask(addTask)"> ADD </button>
+      <button type="submit" class="btn largeur mt-2"> ADD </button>
     </form>
 
     <br>
@@ -20,36 +20,12 @@
 
     <br>
 
+  <Taches/>
 
-        <div class="largeur d-flex justify-content-between m-auto col-6" v-for="(task, index) in tasks" :key="index">
-          <input type="text" v-model="task.name" :readonly="task.editState">
-          <!-- <span>{{task}}</span> -->
-          <button class="btn bg-secondary" @click="test(task)">edit</button>
-          <button class="btn bg-success" @click="DONEtask(task)">done</button>
-          <button class="btn bg-danger" @click="DELETEtask(task)">delete</button>
-        </div>
+  <Faites/>
+    
+  <Effacees/>
 
-      <div class="bg-success largeur m-auto py-2" v-show="fait">
-        <div class=" d-flex justify-content-between  col-6" v-for="(element, index) in done" :key="index.id">
-          <input type="text" v-model="element.name" :readonly="element.editState">
-          <!-- <span>{{element.name}}</span>    -->
-          <button class="btn bg-secondary" @click="test(element)">edit</button>
-          <button class="btn bg-primary" @click="TODOtask(element)">to do</button>
-          <button class="btn bg-danger" @click="DELETEdone(element)">delete</button>   
-        </div>
-      </div>
-
-      <div class="bg-danger largeur m-auto py-2" v-show="efface">
-        <div class=" d-flex justify-content-between col-6" v-show="efface" v-for="(element, index) in deleted" :key="index.id">
-          <input type="text" v-model="element.name" :readonly="element.editState">
-          <!-- <span>{{element.name}}</span>  -->
-          <button class="btn bg-secondary" @click="test(element)">edit</button>
-          <button class="btn bg-primary" @click="TODOdelete(element)">to do</button>     
-        </div>
-      </div>
-
-
-    </div>
   </div>
 </template>
 
@@ -60,9 +36,12 @@
     // mapState,
     mapGetters
   } from 'vuex'
+  import Taches from '@/components/Taches.vue'
+  import Faites from '@/components/Faites.vue'
+  import Effacees from '@/components/Effacees.vue'
+
 
   export default {
-    // name: 'task',
     data() {
       return {
         efface: true,
@@ -79,30 +58,33 @@
       // ]),
       ...mapGetters([
         'addTask',
-        'tasks',
-        'deleted',
-        'done',
+        // 'tasks',
+        // 'deleted',
+        // 'done',
       ])
     },
     methods: {
       ...mapActions([
         'ADDtask',
-        'DELETEtask',
-        'DELETEdone',
-        'EDITtask',
-        'DONEtask',
-        'TODOtask',
-        'TODOdelete'
+        // 'DELETEtask',
+        // 'DELETEdone',
+        // 'EDITtask',
+        // 'DONEtask',
+        // 'TODOtask',
+        // 'TODOdelete'
       ]),
-      test(task){
-        // this.console.log('test');
-        task.editState = !task.editState;
-        console.table('todo',this.tasks);
-        console.table(this.done);
-        console.table(this.deleted);
-      }
+      // test(task) {
+      //   task.editState = !task.editState;
+      //   console.table(this.tasks);
+      //   console.table(this.done);
+      //   console.table(this.deleted);
+      // }
     },
-    components: {},
+    components: {
+      Taches,
+      Faites,
+      Effacees
+    },
   }
 </script>
 

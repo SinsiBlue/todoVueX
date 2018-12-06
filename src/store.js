@@ -30,10 +30,10 @@ export default new Vuex.Store({
     ADD_task(state, addTask){
       state.tasks.push({name: addTask, editState: true});
       state.addTask = '';
-      console.log(state.tasks);
+      // console.log(state.tasks);
     },
     DELETE_task(state, task){
-      console.log(task)
+      // console.log(task)
       let tab = state.tasks.splice(state.tasks.indexOf(task), 1);
       state.deleted.push(tab[0])
       // console.log(state.deleted)
